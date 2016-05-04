@@ -1,6 +1,6 @@
 /**************************************************************************/
 /*! 
-    @file     Adafruit_TCS34725.h
+    @file     Adafruit_TCS34725softi2c.h
     @author   KTOWN (Adafruit Industries)
 
     @section LICENSE
@@ -35,6 +35,8 @@
 /**************************************************************************/
 #ifndef _TCS34725_H_
 #define _TCS34725_H_
+
+#include <SoftwareWire.h>
 
 #if ARDUINO >= 100
  #include <Arduino.h>
@@ -109,15 +111,15 @@ tcs34725IntegrationTime_t;
 typedef enum
 {
   TCS34725_GAIN_1X                = 0x00,   /**<  No gain  */
-  TCS34725_GAIN_4X                = 0x01,   /**<  4x gain  */
+  TCS34725_GAIN_4X                = 0x01,   /**<  2x gain  */
   TCS34725_GAIN_16X               = 0x02,   /**<  16x gain */
   TCS34725_GAIN_60X               = 0x03    /**<  60x gain */
 }
 tcs34725Gain_t;
 
-class Adafruit_TCS34725 {
+class Adafruit_TCS34725softi2c {
  public:
-  Adafruit_TCS34725(tcs34725IntegrationTime_t = TCS34725_INTEGRATIONTIME_2_4MS, tcs34725Gain_t = TCS34725_GAIN_1X);
+  Adafruit_TCS34725softi2c(tcs34725IntegrationTime_t = TCS34725_INTEGRATIONTIME_2_4MS, tcs34725Gain_t = TCS34725_GAIN_1X, uint8_t sdaPin = 30, uint8_t sclPin = 31);
   
   boolean  begin(void);
   void     setIntegrationTime(tcs34725IntegrationTime_t it);
@@ -137,6 +139,10 @@ class Adafruit_TCS34725 {
   boolean _tcs34725Initialised;
   tcs34725Gain_t _tcs34725Gain;
   tcs34725IntegrationTime_t _tcs34725IntegrationTime; 
+  uint8_t _sdaPin;
+  uint8_t _sclPin;
+  SoftwareWire _i2c;
+  float powf(const float x, const float y);
   
   void     disable(void);
 };

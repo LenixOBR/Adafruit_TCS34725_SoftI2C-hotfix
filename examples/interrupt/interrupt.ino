@@ -1,9 +1,12 @@
 #include <Wire.h>
-#include <Adafruit_TCS34725.h>
+#include <Adafruit_TCS34725softi2c.h>
 
+// You can use any digital pin for emulate SDA / SCL
+#define SDApin 8
+#define SCLpin 9
 
 /* Initialise with specific int time and gain values */
-Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_1X);
+Adafruit_TCS34725softi2c tcs = Adafruit_TCS34725softi2c(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_1X, SDApin, SCLpin);
 const int interruptPin = 2;
 volatile boolean state = false;
 

@@ -1,11 +1,16 @@
 #include <Wire.h>
-#include "Adafruit_TCS34725.h"
+#include "Adafruit_TCS34725softi2c.h"
 
 // Pick analog outputs, for the UNO these three work well
 // use ~560  ohm resistor between Red & Blue, ~1K for green (its brighter)
 #define redpin 3
 #define greenpin 5
 #define bluepin 6
+
+// You can use any digital pin for emulate SDA / SCL
+#define SDApin 8
+#define SCLpin 9
+
 // for a common anode LED, connect the common pin to +5V
 // for common cathode, connect the common to ground
 
@@ -16,7 +21,7 @@
 byte gammatable[256];
 
 
-Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
+Adafruit_TCS34725softi2c tcs = Adafruit_TCS34725softi2c(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X, SDApin, SCLpin);
 
 void setup() {
   Serial.begin(9600);

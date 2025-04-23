@@ -154,7 +154,7 @@ boolean Adafruit_TCS34725softi2c::begin(void)
   /* Make sure we're actually connected */
   uint8_t x = read8(TCS34725_ID);
   Serial.println(x, HEX);
-  if (x != 0x44)
+  if ((x != 0x4d) && (x != 0x44) && (x != 0x10))
   {
     return false;
   }

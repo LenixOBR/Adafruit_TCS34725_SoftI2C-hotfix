@@ -36,7 +36,6 @@ Adafruit_TCS34725softi2c tcsB(
 
 void setup() {
   Serial.begin(9600);
-  // inicializa ambos os barramentos
   tcsA.begin();
   tcsB.begin();
 }
